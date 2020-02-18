@@ -29,7 +29,8 @@
 				{{/each}}	
 			</th>
 			<th>{{$value.collage}}</th>
-			<th>{{dataformat($value.enterDate,'yyyy-mm-dd')}}</th>
+			<th>{{dateformat($value.enterDate,'yyyy-mm-dd')}}</th>
+			
 		</tr>
 		{{/each}}
 	</table>

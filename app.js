@@ -1,59 +1,28 @@
+// http模块用来创建服务器
 const http = require("http")
+// 系统模块 path 主要用来拼接路径
 const path = require('path')
-const querystring = require("querystring")
+// serve-static 模块 用来开启静态资源的访问
 const serveStatic = require('serve-static')
-const dataformat = require('dataformat')
+// dateformat 用来格式化世间
+const dateformat = require('dateformat')
+// art-template 模板引擎 用来渲染页面
 const template = require('art-template')
-const getRouter = require('router')
+// 路由模块
+const router = require('./route/index')
+// 数据库模块
 require('./model/DBconnect')
-const Stuednt = require("./model/user")
-
 
 const view = path.join(__dirname, "views")
 const serve = serveStatic(path.join(__dirname, "public"))
-template.defaults.root = view
-template.defaults.imports.dataformat = dataformat
+template.defaults.root = view // 模板引擎配置路径目录
+template.defaults.imports.dateformat = dateformat //模板引擎配置导入方法
 
-const router = getRouter()
-//信息添加的显示页面
-router.get('/add', (req, res) => {
-    let html = template('index.art', {})
-    res.end(html)
-
-})
-//展示信息页面
-router.get('/list', async (req, res) => {
-    let students = await Stuednt.find()
-    console.log(students);
-
-    let html = template('list.art', {
-        students: students
-    })
-    res.end(html)
-})
-
-router.post('/add', (req, res) => {
-    let formData = ""
-    req.on('data', param => {
-        formData += param
-    })
-    req.on('end', async () => {
-        const student = querystring.parse(formData)
-        await Stuednt.create(student)
-        console.log(student);
-
-        res.writeHead(301, {
-            Location: "/list"
-
-        })
-        res.end()
-    })
-})
 const app = http.createServer()
 
 app.on("request", (req, res) => {
     serve(req, res, () => { })
     router(req, res, () => { })
 })
-app.listen(3000)
-console.log("http://localhost:3000");
+app.listen(80)
+console.log("http://localhost");
