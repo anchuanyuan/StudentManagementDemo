@@ -1,0 +1,26 @@
+{
+  "name": "StudentManagementDemo",
+  "version": "1.0.0",
+  "description": "学生档案信息管理案例",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anchuanyuan/StudentManagementDemo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anchuanyuan/StudentManagementDemo/issues"
+  },
+  "homepage": "https://github.com/anchuanyuan/StudentManagementDemo#readme",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "dataformat": "^1.0.0",
+    "router": "^1.3.4",
+    "serve-static": "^1.14.1"
+  }
+}
